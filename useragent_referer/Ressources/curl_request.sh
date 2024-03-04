@@ -14,8 +14,6 @@ if [ "$#" -eq 1 ]; then
     target_url="http://$1/index.php?page=b7e44c7a40c5f80139f0a50f3650fb2bd8d00b0d24667c4c2ca32c88e13b758f"
 fi
 
-curl -A "$user_agent" -e "$referer" "$target_url" | grep -o 'The flag[^<]*'
-
 result=$(curl -A "$user_agent" -e "$referer" "$target_url" | grep -o 'The flag[^<]*')
 
 if [ -z "$result" ]; then

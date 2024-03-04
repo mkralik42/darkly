@@ -7,7 +7,7 @@ Right after the member section, we checked if there were other SQL query on the 
 The "1 or 1=1" will provide the list. The 5th image seemed interesting. As we did previously, we can use the "1 UNION SELECT table_name, column_name FROM information_schema.columns" that will help finding the argument to query from the database. we found "list_images" and we are still interested in id=5. Tried "5 UNION SELECT title, comment FROM list_images WHERE id=5" and got:
 "If you read this just use this md5 decode lowercase then sha256 to win this flag ! : 1928e8083cf461a51303633093573c46"
 Use crackstation and cyberchef (or echo -n albatroz | sha256sum).
-Here we could dump the database from the web application. 
+Here we could dump the database from the web application.
 
 ## INFOS
 SQL injection allows an attacker to interfere with the queries that an application makes to its database.

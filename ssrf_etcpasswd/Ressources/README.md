@@ -1,19 +1,33 @@
-# PATH TRAVERSAL
+# PATH TRAVERSAL AND SSRF
 
 ## VULNERABILITY
-Looking at famous web application vulnerability, we found that getting access to the /etc/passwd file is one of them.
+Exploring common web application vulnerabilities, we identified gaining access to the /etc/passwd file as a significant threat. So, we will attempt to access it.
 
 ## EXPLOIT
-In this scenario, we tried to find the path to the file by using the "dot dot slash method", meaning we moved directory to directory and asking the server for the flag.
-We knew we were looking in the right direction when the pop ups encourages us.
+In this context, we attempted to find the path to the /etc/passwd file by using the “dot-dot-slash (../)” method, navigating through directories and requesting the server for the flag. Encouraging pop-ups confirmed that we were on the right track. Ultimately, we obtained the flag using the following path:
+http://192.168.56.2/index.php?page=../../../../../../../etc/passwd
 
 ## INFOS
-A Server-side Request Forgery (SSRF) vulnerability occurs when an attacker manipulates a server-side application into making HTTP requests to a domain of their choice. This vulnerability exposes the server to arbitrary external requests directed by the attacker.
-A path traversal attack (also known as directory traversal) aims to access files and directories that are stored outside the web root folder.
-An attacker could have access to sensitive information and execute previously uploaded script for example.
+A Server-side Request Forgery (SSRF) vulnerability arises when an attacker manipulates a server-side application, making it send HTTP requests to a specified domain. This vulnerability exposes the server to arbitrary external requests directed by the attacker. Path traversal attacks (or directory traversal) aim to access files and directories stored outside the web root folder. An attacker gaining such access could obtain sensitive information and execute previously uploaded scripts, leading to potential security breaches.
 
 ## PATCH
-You should not have a path to local filesystem with user supplied input or there should be a validation from the server of the path sent by the user. We might exclude some characters like ".." from paths. Limiting the access only to the file present in the page directory.
+Mitigate SSRF and path traversal vulnerabilities through the following measures:
+
+    1. Input Validation:
+        - Rigorously sanitize and validate user input.
+        - Implement strict controls on input parameters to prevent malicious data.
+
+    2. Path Security:
+        - Avoid exposing local filesystem paths based on user input.
+        - Enforce server-side validation for user-specified paths, excluding restricted characters.
+
+    3. Access Controls:
+        - Implement strong access controls to restrict server-side requests.
+        - Authorize and validate server-side requests to specific domains.
+
+    4. Logging and Monitoring:
+        - Set up comprehensive logging to track and detect SSRF attempts.
+        - Monitor and log suspicious activities related to path traversal.
 
 ## SOURCES
 https://owasp.org/www-community/attacks/Path_Traversal

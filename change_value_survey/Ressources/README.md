@@ -1,16 +1,16 @@
-# INSUFFICIENT DATA VALIDATION
+# INSECURE DATA VALIDATION
 
 ## VULNERABILITY
-In the page survey, there is an array where you can vote with a user input. Let's see if the values are protected.
+On the survey page, users can submit votes through an array with a user input. However, there are concerns about the effectiveness of input validation protection. Let's examine the security measures in place for these values.
 
 ## EXPLOIT
-Click right > inspect > Network > Post /?page=survey > Request, here we can see that there are two values (subject et value). Right click on the POST > Edit and Resend > scroll down to body and change the values. Then send it and check the Response if the page didn't load.
+By inspecting the network traffic after submitting a vote (/?page=survey), we identify the values (subject and value) included in the request body. Right-clicking on the POST request allows us to edit and resend it. By modifying the value to something higher than 10, we were able to obtain the flag. Upon sending it, we checked the response to confirm successful exploitation.
 
 ## INFOS
-This vulnerability may expose the web application to many situations like injection, attack, buffer overflow, etc.
+This vulnerability exposes the web application to various threats, including injection attacks, buffer overflows, and more.
 
 ## PATCH
-The values should always be controlled, sanitized and checked in the backend.
+To limit this issue, it is essential to implement robust backend controls, ensuring values are thoroughly validated, sanitized, and checked before processing.
 
 ## SOURCES
 https://cheatsheetseries.owasp.org/cheatsheets/XML_Security_Cheat_Sheet.html#improper-data-validation

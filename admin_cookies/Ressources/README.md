@@ -1,18 +1,28 @@
 # COOKIES BREACH
 
 ## VULNERABILITY
-While inspecting the site, we checked the cookies in Storage from Inspect. We found this sensitive cookie : "I_am_admin:"68934a3e9455fa72420237eb05902327"
+While inspecting the site, we checked the cookies stored in the browser's storage through the browser's developer tools. We found a sensitive cookie with the identifier: "I_am_admin" and the value: "68934a3e9455fa72420237eb05902327".
 
 ## EXPLOIT
-We decrypted the value associated with the "I am admin". Using Crackstation, we translated the value using md5: false. We edited the value with “true” hashed with Cyberchef in md5. To get the flag, we reloaded the page.
+We decrypted the value associated with the "I_am_admin" cookie.  Using Crackstation, we decoded the MD5 hash, revealing the plaintext value "false". Then, we edited the cookie value to "true" and hashed it using Cyberchef with MD5. Finally, to obtain the flag, we reloaded the page.
 
 ## INFOS
-By editing or manipulating the cookie, the attacker can gain access to the user data stored in the cookie. Cookie poisoning attacks are dangerous because they enable attackers to use the data stored inside cookies to gain unauthorized access to users' accounts or to steal their identities.
-
-In this configuration, we could obtain the admin rights just by editing the cookie section. First, we do not advise putting critical information in Cookies. We would recommend using a proper session with connection, password and token. Moreover use a secure algorithm for hashing, md5 are insecure and very easy to crack.
+The vulnerability comes from insecure storage and handling of session-related cookies, creating an opportunity for attackers to manipulate authentication states and potentially gain unauthorized access to privileged functionalities. Editing or manipulating the cookie allows attackers to access user data, posing a risk of unauthorized account access and identity theft through cookie poisoning attacks.
 
 ## PATCH
-You could encrypt the cookie with an secret key, or use a signed cookie (sign by the server), or even use the "secure" attribute (the cookie will only be send for HTTPS requests).
+To limit the risks associated with insecure handling of session-related cookies, implement the following measures:
+
+    1. Cookie Encryption:
+        - Encrypt cookies using a secret key.
+        - Implement signed cookies verified by the server.
+
+    2. Secure Attribute:
+        Utilize the "secure" attribute for cookies, ensuring they are sent only for HTTPS requests.
+
+    3. Best Practices:
+        - Avoid storing critical information in cookies.
+        - Implement secure sessions with encryption, strong passwords, and tokens.
+        - Use robust hashing algorithms, avoiding insecure methods like MD5.
 
 ## SOURCES
 https://www.techtarget.com/searchsecurity/definition/cookie-poisoning#:~:text=By%20editing%20or%20manipulating%20the,or%20to%20steal%20their%20identities.
