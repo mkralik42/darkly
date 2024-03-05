@@ -1,16 +1,48 @@
-# INVALID REDIRECTS
+# UNSECURE REDIRECTS
 
 ## VULNERABILITY
-In the footer, there is 3 redirects to social media. Inspecting the instagram logo for example, show that it queries the backend and redirect to a site.
+
+In the footer, there are three redirect links to social media. Inspecting the Instagram logo, for example, reveals that it queries the backend and redirects to a site.
+
+```html
+<li>
+  <a
+    href="index.php?page=redirect&site=instagram"
+    class="icon fa-instagram"
+  ></a>
+</li>
+```
 
 ## EXPLOIT
-We can edit that part "redirect&site=wikipedia", then click on the instagram logo to get the flag.
+
+We manipulated the URL from "?page=redirect&site=instagram" to "?page=redirect&site=wikipedia," then clicked on the Instagram logo to obtain the flag.
 
 ## INFOS
-It is dangerous since we could edit the redirection to a malicious site. An attacker may successfully launch a phishing scam and steal user credentials (one of the best example would be to redirect to a fake bank site).
+
+This vulnerability poses a significant risk as it allows for the modification of redirection to potentially malicious sites. An attacker could execute a phishing scam, leading users to divulge sensitive credentials. One notable example is redirecting to a fraudulent banking site.
 
 ## PATCH
-We should check with the backend if it is sanitized or in the database or in an allow list (trusted URLs). You should not allow user input unless the value is valid, appropriate and authorized for the user. We would advice forcing all redirects to first go through a page notifying users that they are going off of your site, with the destination clearly displayed, and have them click a link to confirm.
+
+To improve the security of redirects and prevent potential exploitation, consider the following measures:
+
+    1. Backend Validation:
+      - Implement robust validation checks on the backend to ensure that redirect URLs are thoroughly sanitized.
+      - Verify the legitimacy of the redirect URLs against a secure database or an allow list of trusted URLs.
+
+    2. Restrict User Input:
+      - Avoid allowing user input for redirect URLs unless the value is valid, appropriate, and explicitly authorized for the user.
+
+    3. Forced Confirmation Page:
+      - Enforce a mandatory confirmation page for all redirects, ensuring users are notified that they are leaving your site.
+      - Display the destination URL prominently and require users to click a link to confirm their intent before proceeding.
+
+    4. Secure Parameter Handling:
+      - When using parameters in redirect URLs, adopt secure handling practices to prevent manipulation by attackers.
+      - Avoid passing sensitive information through URL parameters.
+
+    5. Monitoring and Logging:
+      - Set up monitoring and logging mechanisms to detect and log suspicious redirect activities. This can help in identifying and responding to potential attacks.
 
 ## SOURCES
+
 https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html

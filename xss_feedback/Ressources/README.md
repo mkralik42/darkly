@@ -1,23 +1,39 @@
-# XXS CROSS SITE SCRIPTING
+# STORED XXS (CROSS SITE SCRIPTING)
 
 ## VULNERABILITY
-On this page, there are user input that is not well protected from XSS.
+
+The feedback page (?page=feedback) contains two user inputs for name and message. Upon submission, the data is sent to the server, stored in the database, and displayed on the page. This setup makes it susceptible to XSS attacks, as user inputs are not adequately protected.
 
 ## EXPLOIT
-The feedback page makes you want to inject a script into the inputs (XSS script from OWASP), but it seems that there is a filter that suppress the anything with <> and the comment returns empty.
-Strange thing is if you write alert or script, the flag pop up.
-Once you land the flag, you will have to restart the machine if you want to try other inputs since the flag wont go away.
+
+We tried injecting a script into the inputs, but it seems there's a filter blocking anything with '<>' tags, resulting in empty comments. However, we successfully triggered the flag by entering specific keywords like 'script' or 'alert'.
 
 ## INFOS
-Cross-site scripting (also known as XSS) is a web security vulnerability that allows an attacker to compromise the interactions that users have with a vulnerable application.
-XSS attacks are serious and can lead to account impersonation, observing user behaviour, loading external content, stealing sensitive data, and more.
+
+Cross-site scripting (XSS) is a significant web security vulnerability enabling attackers to compromise user interactions within a vulnerable application. These attacks pose serious risks, ranging from account impersonation and monitoring user behavior to loading external content and stealing sensitive data.
+
+This specific case is a stored XSS attack : the injected script is permanently stored on the server. This stored script is then served to other users accessing the same content, allowing the attacker to impact multiple users. This type of XSS presents a persistent threat as malicious scripts remain on the server, affecting all users who view the compromised content.
 
 ## PATCH
-Treat all user input as untrusted
-Use a filter that remove dangerous keywords, for example, the infamous < script> tag, JavaScript commands, CSS styles, and other dangerous HTML markups
-Use escaping/encoding (tell the browser that the data you are sending should be treated as data and should not be interpreted in any other way)
-Set the HttpOnly flag
+
+To reduce the risks associated with stored XSS attacks, consider implementing the following security measures:
+
+    1. Input Validation and Filtering:
+      - Treat all user input as untrusted.
+      - Use a strict filter to remove dangerous keywords, such as the infamous <script> tag, JavaScript commands, CSS styles, and other hazardous HTML markups.
+
+    2. Encode data on output
+      - Encode the output to prevent it from being interpreted as active content. Depending on the output context, this might require applying combinations of HTML, URL, JavaScript, and CSS encoding.
+
+    3. Use Appropriate Response Headers:
+      - Set the HttpOnly flag for cookies to prevent them from being accessed through JavaScript, reducing the risk of unauthorized access to session information.
+      - Implement proper response headers, such as Content-Type and X-Content-Type-Options, to prevent XSS in HTTP responses not intended to contain HTML or JavaScript.
+
+    4. Content Security Policy (CSP):
+      - Implement Content Security Policy (CSP) as a last line of defense to reduce the severity of any XSS vulnerabilities that may still occur.
 
 ## SOURCES
+
 https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
 https://www.acunetix.com/blog/articles/preventing-xss-attacks/
+https://portswigger.net/web-security/cross-site-scripting
