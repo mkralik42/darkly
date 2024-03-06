@@ -1,10 +1,10 @@
 # SQL INJECTION
 
-## VULNERABILITY
+## IDENTIFY THE VULNERABILITY
 
 The image search page, accessible at http://192.168.56.2/?page=searchimg, features another search-by-id functionality that appears susceptible to SQL injection.
 
-## EXPLOIT
+## EXPLOIT THE VULNERABILITY
 
 A simple input like **1 or 1=1** provides a list of images, with the 5th image catching our interest.
 The following query revealed details about tables and columns in the database :
@@ -13,7 +13,9 @@ The following query revealed details about tables and columns in the database :
 1 UNION SELECT table_name, column_name FROM information_schema.columns
 ```
 
-Focusing on the "images" keyword, we identified the table "list_images" and the 4 columns : 'id', 'url', 'title', and 'comment'. The "list_images" table looks like this :
+Focusing on the "images" keyword, we identified the table "list_images" and the 4 columns : 'id', 'url', 'title', and 'comment'.
+
+The "list_images" table looks like this :
 
 | ID  | Title   | Url         |
 | --- | ------- | ----------- |
@@ -31,15 +33,14 @@ We then used the query :
 and found this message :
 
 > Title: If you read this just use this md5 decode lowercase then sha256 to win this flag ! : 1928e8083cf461a51303633093573c46
-> Url : Hack me ?
 
 We successfully retrieved the flag by decoding and re-encoding the hash using tools like CrackStation and CyberChef, or via the command echo -n albatroz | sha256sum.
 
-## INFOS
+## INFORMATION ON SQL INJECTION
 
 SQL injection is a malicious technique that enables an attacker to manipulate or interfere with the SQL queries executed by an application to its associated database. This vulnerability can have severe consequences, **granting unauthorized access to, and control over, the database**. An attacker exploiting SQL injection may gain the ability to **read, modify, or delete sensitive data stored in the database**. This could potentially include compromising users' personal information, accessing email addresses, and obtaining passwords. The impact of SQL injection extends beyond mere unauthorized data access, as it poses a substantial threat to the confidentiality, integrity, and availability of the entire database.
 
-## PATCH
+## PATCH THE VULNERABILITY
 
 To reduce the risks associated with SQL injection attacks, consider implementing the following security measures:
 

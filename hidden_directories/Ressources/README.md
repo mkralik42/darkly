@@ -1,12 +1,12 @@
-# README SEARCH IN HIDDEN DIRECTORIES
+# HIDDEN DIRECTORIES
 
 ## IDENTIFY THE VULNERABILITY
 
-After exploring the robots.txt file, we uncovered the existence of the /.hidden directory, a complex structure with numerous directories, sub-directories, and README files. The intentional complexity seemed designed to obscure the location of the flag
+After exploring the robots.txt file, we uncovered the existence of the /.hidden directory, a complex structure with numerous directories, sub-directories, and README files. The intentional complexity seemed designed to obscure the location of the flag. Although this method appears effective initially, it poses a security risk due to the absence of access controls.
 
 ## EXPLOIT THE VULNERABILITY
 
-To navigate through this intricate maze quickly, we developed a Python script for recursive scraping. Using BeautifulSoup, a Python package for parsing HTML and XML documents, we methodically located and read all the README files. Our objective was to identify the presence of the keyword 'flag' within each README.
+To navigate through this intricate maze quickly, we developed a Python script for recursive scraping. Using requests and BeautifulSoup, a Python package for parsing HTML and XML documents, we methodically located and read all the README files. Our objective was to identify the presence of the keyword 'flag' within each README.
 Finally, we found it on the 4th level of the directory structure, in the file /.hidden/whtccjokayshttvxycsvykxcfm/igeemtxnvexvxezqwntmzjltkt/lmpanswobhwcozdqixbowvbrhw/README.
 
 ```python
@@ -35,7 +35,6 @@ def download_readme(url: str, output_file: str = 'output_readme.txt') -> bool:
         print(f"Error: {e}")
 
 def recursive_readme_search(url: str, visited_urls: set, depth: int = 10):
-    global readme_count
     if depth == 0 or not url:
         return
 
@@ -44,6 +43,7 @@ def recursive_readme_search(url: str, visited_urls: set, depth: int = 10):
     else:
         visited_urls.add(url)
 
+    # Get all the link elements from the URL using requests and BeautifulSoup
     link_elements = get_link_elements(url)
     if link_elements:
         try:
@@ -57,7 +57,6 @@ def recursive_readme_search(url: str, visited_urls: set, depth: int = 10):
 
                 # Check if the link is a README file
                 if link_url.endswith("README"):
-                    readme_count += 1
                     flag_found = download_readme(absolute_url)
                     if (flag_found == True):
                         return
@@ -71,11 +70,11 @@ def recursive_readme_search(url: str, visited_urls: set, depth: int = 10):
 
 ## INFORMATION ON HIDDEN DIRECTORIES
 
-The utilization of hidden directories, as discovered through the robots.txt file, introduces potential security risks and underscores the importance of proper access controls. While hidden directories aim to obscure specific paths within a web application, their inclusion in the robots.txt file inadvertently discloses their existence. This exposure, combined with the lack of stringent access controls, may lead to unauthorized access to sensitive files contained within these hidden directories.
+The use of hidden directories, as discovered through the robots.txt file, introduces potential security risks and points out the importance of proper access controls. While hidden directories aim to obscure specific paths within a web application, their inclusion in the robots.txt file inadvertently discloses their existence. This exposure, combined with the lack of strict access controls, may lead to unauthorized access to sensitive files contained within these hidden directories.
 
 ## PATCH THE VULNERABILITY
 
-To conceal a sensitive file:
+To secure a sensitive file:
 
 - Restrict access to admin privileges :
   Limit file access to privileged accounts, reducing the risk of unauthorized viewing or modification.

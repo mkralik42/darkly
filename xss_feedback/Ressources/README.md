@@ -1,20 +1,20 @@
 # STORED XXS (CROSS SITE SCRIPTING)
 
-## VULNERABILITY
+## IDENTIFY THE VULNERABILITY
 
-The feedback page (?page=feedback) contains two user inputs for name and message. Upon submission, the data is sent to the server, stored in the database, and displayed on the page. This setup makes it susceptible to XSS attacks, as user inputs are not adequately protected.
+The feedback page (http://192.168.56.2/?page=feedback) contains two user inputs for name and message. Upon submission, the data is sent to the server, stored in the database, and displayed on the page. This setup makes it susceptible to XSS attacks, as user inputs are not adequately protected.
 
-## EXPLOIT
+## EXPLOIT THE VULNERABILITY
 
 We tried injecting a script into the inputs, but it seems there's a filter blocking anything with '<>' tags, resulting in empty comments. However, we successfully triggered the flag by entering specific keywords like 'script' or 'alert'.
 
-## INFOS
+## INFORMATION ON STORED XSS
 
 Cross-site scripting (XSS) is a significant web security vulnerability enabling attackers to compromise user interactions within a vulnerable application. These attacks pose serious risks, ranging from account impersonation and monitoring user behavior to loading external content and stealing sensitive data.
 
 This specific case is a stored XSS attack : the injected script is permanently stored on the server. This stored script is then served to other users accessing the same content, allowing the attacker to impact multiple users. This type of XSS presents a persistent threat as malicious scripts remain on the server, affecting all users who view the compromised content.
 
-## PATCH
+## PATCH THE VULNERABILITY
 
 To reduce the risks associated with stored XSS attacks, consider implementing the following security measures:
 
@@ -30,7 +30,7 @@ To reduce the risks associated with stored XSS attacks, consider implementing th
       - Implement proper response headers, such as Content-Type and X-Content-Type-Options, to prevent XSS in HTTP responses not intended to contain HTML or JavaScript.
 
     4. Content Security Policy (CSP):
-      - Implement Content Security Policy (CSP) as a last line of defense to reduce the severity of any XSS vulnerabilities that may still occur.
+      - Implement Content Security Policy (CSP) to reduce the severity of any XSS vulnerabilities that may still occur. CSP allows website administrators to define and enforce a set of policies specifying the trusted sources of content that the browser should execute or load.
 
 ## SOURCES
 

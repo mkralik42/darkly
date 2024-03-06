@@ -6,7 +6,7 @@ Upon examination, we discovered that the login page, accessible at http://192.16
 
 ## EXPLOIT THE VULNERABILITY
 
-We executed a brute force attack by repeatedly attempting unauthorized logins using a Python script and a list of commonly used passwords. The script utilized the requests library to dispatch multiple GET requests to the login page, each time featuring a distinct password. Then, it checked the response to determine if the login was successful. If the wrong answer image was not present in the response, the login was considered successful.
+We executed a brute force attack by repeatedly attempting unauthorized logins using a Python script and a list of commonly used passwords. The script used the requests library to dispatch multiple GET requests to the login page, each time featuring a distinct password. Then, it checked the response to determine if the login was successful. If the wrong answer image was not present in the response, the login was considered successful.
 
 ```python
 def login(username: str, password: str) -> bool:
@@ -29,16 +29,16 @@ def test_common_passwords(username: str) -> None:
                 return
 ```
 
-Ultimately, we were able to gain access to the admin account by guessing the password "shadow". We can login with any username. This allowed us to access the flag.
+Ultimately, we were able to gain access to the admin account by guessing the password **"shadow"**. With this knowledge, we can log in using any username, granting us access to the flag.
 
 ## INFORMATION ON BRUTE FORCE ATTACKS
 
-Brute force is a hacking technique used for guessing the user by trying various possible login credentials. Brute-force involves trying thousands of login credentials repeatedly in a short time span until the attacker succeeds.
+A brute force attack uses trial-and-error to guess login info, encryption keys, or find a hidden web page. Hackers work through all possible combinations hoping to guess correctly.
 In regards to authentication, when no password policy is in place an attacker can use lists of common username and passwords to brute force a username or password field until successful authentication.
 
 ## PATCH THE VULNERABILITY
 
-To mitigate the risks associated with brute force attacks, consider the following measures:
+To limit the risks associated with brute force attacks, consider the following measures:
 
     1. Switch to POST Request: Prefer using a POST request for login instead of a GET request. This ensures that credentials are sent in the HTTP message body rather than the URL.
 
@@ -53,8 +53,7 @@ To mitigate the risks associated with brute force attacks, consider the followin
         - Notify users and block accounts after a certain number of unsuccessful attempts.
 
     4. Require Multi-Factor Authentication (MFA):
-        - Enforce the use of two-factor authentication (2FA).
-        - 2FA adds an extra layer of security by requiring users to provide two different authentication factors.
+        Enforce the use of two-factor authentication. 2FA adds an extra layer of security by requiring users to provide two different authentication factors.
 
     5. Utilize CAPTCHA:
         Implement CAPTCHA to differentiate between human and automated login attempts.
@@ -65,8 +64,10 @@ To mitigate the risks associated with brute force attacks, consider the followin
     7. Introduce Time Delay:
         Implement time delays between login attempts to slow down brute force attacks.
 
-Implementing these security measures collectively strengthens the defense of the sign-in page against brute force attacks.
+    8. Remove any unused accounts with high-level permissions:
+    These are the cyber equivalent of doors with weak locks that make breaking in easy.
 
 ## SOURCES
 
 https://www.getastra.com/blog/cms/prevent-brute-force-attack-in-php/
+https://www.kaspersky.com/resource-center/definitions/brute-force-attack

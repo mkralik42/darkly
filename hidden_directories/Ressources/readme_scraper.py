@@ -52,7 +52,7 @@ def get_link_elements(url: str) -> set:
         if response.status_code == 200:
             # Parse the HTML content using BeautifulSoup
             soup = BeautifulSoup(response.content, 'html.parser')
-            # Find all img elements
+            # Find all link elements
             link_elements = soup.find_all('a')
             return link_elements
         else:
