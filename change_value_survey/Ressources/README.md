@@ -21,15 +21,19 @@ Insecure data validation poses a significant risk to a web application's overall
 To limit this issue, it is essential to implement robust backend controls :
 
 1. Robust Input Validation:
+
    Implement strict input validation mechanisms to ensure that incoming data adheres to expected formats, types, and ranges. This includes validating user inputs, API requests, and any data received from external sources.
 
 2. Sanitization of Input:
+
    Utilize proper input sanitization techniques to cleanse data of any potentially malicious characters or code. This helps prevent injection attacks by neutralizing harmful elements within the input data.
 
 3. Regular Expression Checks:
+
    Employ regular expressions to validate and enforce specific patterns within data. This ensures that inputs conform to predefined criteria, reducing the risk of unexpected and potentially harmful inputs.
 
 4. Input Length and Size Limits:
+
    Enforce limits on the length and size of input data to prevent buffer overflows. This helps maintain the application's stability and resilience against attacks aiming to exploit memory vulnerabilities.
 
 ## SOURCES

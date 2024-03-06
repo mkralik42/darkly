@@ -18,19 +18,23 @@ This specific case is a stored XSS attack : the injected script is permanently s
 
 To reduce the risks associated with stored XSS attacks, consider implementing the following security measures:
 
-    1. Input Validation and Filtering:
-      - Treat all user input as untrusted.
-      - Use a strict filter to remove dangerous keywords, such as the infamous <script> tag, JavaScript commands, CSS styles, and other hazardous HTML markups.
+1. Input Validation and Filtering:
+  
+  - Treat all user input as untrusted.
+  - Use a strict filter to remove dangerous keywords, such as the infamous <script> tag, JavaScript commands, CSS styles, and other hazardous HTML markups.
 
-    2. Encode data on output
-      - Encode the output to prevent it from being interpreted as active content. Depending on the output context, this might require applying combinations of HTML, URL, JavaScript, and CSS encoding.
+2. Encode data on output
 
-    3. Use Appropriate Response Headers:
-      - Set the HttpOnly flag for cookies to prevent them from being accessed through JavaScript, reducing the risk of unauthorized access to session information.
-      - Implement proper response headers, such as Content-Type and X-Content-Type-Options, to prevent XSS in HTTP responses not intended to contain HTML or JavaScript.
+  - Encode the output to prevent it from being interpreted as active content. Depending on the output context, this might require applying combinations of HTML, URL, JavaScript, and CSS encoding.
 
-    4. Content Security Policy (CSP):
-      - Implement Content Security Policy (CSP) to reduce the severity of any XSS vulnerabilities that may still occur. CSP allows website administrators to define and enforce a set of policies specifying the trusted sources of content that the browser should execute or load.
+3. Use Appropriate Response Headers:
+
+  - Set the HttpOnly flag for cookies to prevent them from being accessed through JavaScript, reducing the risk of unauthorized access to session information.
+  - Implement proper response headers, such as Content-Type and X-Content-Type-Options, to prevent XSS in HTTP responses not intended to contain HTML or JavaScript.
+
+4. Content Security Policy (CSP):
+  
+  Implement Content Security Policy (CSP) to reduce the severity of any XSS vulnerabilities that may still occur. CSP allows website administrators to define and enforce a set of policies specifying the trusted sources of content that the browser should execute or load.
 
 ## SOURCES
 

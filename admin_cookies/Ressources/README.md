@@ -26,6 +26,7 @@ To limit the risks associated with insecure handling of session-related cookies,
    - Implement signed cookies verified by the server.
 
 2. Secure Attribute:
+
    Utilize the "secure" attribute for cookies, ensuring they are sent only for HTTPS requests.
 
 3. Best Practices:

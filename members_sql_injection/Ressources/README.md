@@ -57,25 +57,31 @@ To reduce the risks associated with SQL injection attacks, consider implementing
 
 1. Input Validation and Parameterized Statements:
 
-- Validate and sanitize all user inputs on the server side.
-- Use parameterized statements (prepared statements) in SQL queries to separate user input from SQL code.
+   - Validate and sanitize all user inputs on the server side.
+   - Use parameterized statements (prepared statements) in SQL queries to separate user input from SQL code.
 
 2. Stored Procedures:
+
    Utilize stored procedures to encapsulate and execute SQL queries. This adds an additional layer of security by limiting direct access to the database.
 
 3. Least Privilege Principle:
+
    Ensure that database accounts used by your application have the least privilege necessary to perform their tasks. Avoid using accounts with unnecessary permissions.
 
 4. Whitelisting:
+
    Implement input whitelisting, allowing only predefined, safe characters or patterns. This helps prevent the injection of malicious SQL code.
 
 5. ORMs and Parameterized Queries:
+
    If using Object-Relational Mapping (ORM) frameworks, make sure they generate parameterized queries to prevent SQL injection vulnerabilities.
 
 6. Error Handling:
+
    Implement proper error handling to avoid exposing sensitive information in error messages. Provide generic error messages to users and log detailed errors for administrators.
 
 7. Web Application Firewalls (WAFs):
+
    Use Web Application Firewalls to filter and monitor HTTP traffic between a web application and the Internet. WAFs can help detect and prevent SQL injection attacks.
 
 ## SOURCES

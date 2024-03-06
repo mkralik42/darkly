@@ -31,6 +31,7 @@ To improve the security of redirects and prevent potential exploitation, conside
    - Verify the legitimacy of the redirect URLs against a secure database or an allow list of trusted URLs.
 
 2. Restrict User Input:
+
    Avoid allowing user input for redirect URLs unless the value is valid, appropriate, and explicitly authorized for the user.
 
 3. Forced Confirmation Page:
@@ -44,6 +45,7 @@ To improve the security of redirects and prevent potential exploitation, conside
    - Avoid passing sensitive information through URL parameters.
 
 5. Monitoring and Logging:
+
    Set up monitoring and logging mechanisms to detect and log suspicious redirect activities. This can help in identifying and responding to potential attacks.
 
 ## SOURCES

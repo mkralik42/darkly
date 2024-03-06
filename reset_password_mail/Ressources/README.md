@@ -30,9 +30,11 @@ In HFM attacks, an attacker can modify the values of these hidden fields to bypa
 ## PATCH THE VULNERABILITY
 
 1. Enhance Server-Side Validation:
+
    Strengthen the validation of user inputs on the server side, ensuring that all data submitted adheres to predefined criteria and eliminating the risk of malicious manipulation.
 
 2. Secure Handling of Webmaster Email Information:
+
    Avoid pre-filling the webmaster's email address by default on the client side. Instead, securely store this information on the server to prevent potential exposure or manipulation by clients.
 
 ## SOURCES

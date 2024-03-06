@@ -40,31 +40,38 @@ In regards to authentication, when no password policy is in place an attacker ca
 
 To limit the risks associated with brute force attacks, consider the following measures:
 
-    1. Switch to POST Request: Prefer using a POST request for login instead of a GET request. This ensures that credentials are sent in the HTTP message body rather than the URL.
+1. Switch to POST Request:
 
-    2. Implement Password Complexity:
-        - Mix uppercase and lowercase letters.
-        - Use alphanumeric combinations.
-        - Incorporate special characters for added security.
+    Prefer using a POST request for login instead of a GET request. This ensures that credentials are sent in the HTTP message body rather than the URL.
 
-    3. Limit Login Attempts:
-        - Restrict the number of login attempts.
-        - Implement IP blocking for repeated failures.
-        - Notify users and block accounts after a certain number of unsuccessful attempts.
+2. Implement Password Complexity:
 
-    4. Require Multi-Factor Authentication (MFA):
-        Enforce the use of two-factor authentication. 2FA adds an extra layer of security by requiring users to provide two different authentication factors.
+    - Mix uppercase and lowercase letters.
+    - Use alphanumeric combinations.
+    - Incorporate special characters for added security.
 
-    5. Utilize CAPTCHA:
-        Implement CAPTCHA to differentiate between human and automated login attempts.
+3. Limit Login Attempts:
+    
+    - Restrict the number of login attempts.
+    - Implement IP blocking for repeated failures.
+    - Notify users and block accounts after a certain number of unsuccessful attempts.
 
-    6. Deploy a Web Application Firewall (WAF):
-        Use a WAF to filter and monitor HTTP traffic, providing an additional layer of protection.
+4. Require Multi-Factor Authentication (MFA):
 
-    7. Introduce Time Delay:
-        Implement time delays between login attempts to slow down brute force attacks.
+    Enforce the use of two-factor authentication. 2FA adds an extra layer of security by requiring users to provide two different authentication factors.
 
-    8. Remove any unused accounts with high-level permissions:
+5. Utilize CAPTCHA:
+    Implement CAPTCHA to differentiate between human and automated login attempts.
+
+6. Deploy a Web Application Firewall (WAF):
+    Use a WAF to filter and monitor HTTP traffic, providing an additional layer of protection.
+
+7. Introduce Time Delay:
+
+    Implement time delays between login attempts to slow down brute force attacks.
+
+8. Remove any unused accounts with high-level permissions:
+
     These are the cyber equivalent of doors with weak locks that make breaking in easy.
 
 ## SOURCES

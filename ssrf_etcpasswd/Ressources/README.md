@@ -36,6 +36,7 @@ Limit SSRF and path traversal vulnerabilities through the following measures:
    - Authorize and validate server-side requests to specific domains.
 
 4. Logging and Monitoring:
+
    - Set up comprehensive logging to track and detect SSRF attempts.
    - Monitor and log suspicious activities related to path traversal.
 

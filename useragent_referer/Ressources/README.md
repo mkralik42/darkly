@@ -36,12 +36,15 @@ By manipulating the referer and user-agent headers, attackers can deceive a serv
 To reduce the risks associated with manipulated request headers, it is imperative not to blindly trust the information provided in headers. Web applications should :
 
 1. Validate and Verify Headers:
+
    Enforce stringent validation checks for incoming request headers, with a particular focus on referer and user-agent information.
 
 2. Ensure Integrity and Authenticity:
+
    Verify the integrity and authenticity of headers to prevent potential misuse and unauthorized access. Implement secure methods to confirm that the provided header information is legitimate.
 
 3. Detect Forged Headers:
+
    Integrate mechanisms to actively detect and block forged headers, adding an additional layer of protection against manipulative practices.
 
 ## SOURCES
